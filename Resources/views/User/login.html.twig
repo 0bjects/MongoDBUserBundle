@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('login_check') }}" method="post">
+    <label for="username">Login Name:</label>
+    <input type="text" id="username" name="_username" placeholder="Login Name" value="{{ last_username }}" />
+    <br/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" placeholder="Password" />
+    <br/>
+
+    <label for="remember_me">Remember me:</label>
+    <input type="checkbox" id="remember_me" name="_remember_me" checked />
+    <br/>
+
+    <button type="submit">Login</button>
+</form>
+{% endblock %}
