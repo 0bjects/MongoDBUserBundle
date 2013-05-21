@@ -67,7 +67,6 @@ class User implements AdvancedUserInterface {
 
     /**
      * @MongoDB\String
-     * @Assert\NotBlank(groups={"signup", "edit", "firstName"})
      */
     private $firstName;
 
@@ -464,7 +463,7 @@ class User implements AdvancedUserInterface {
      * @return User
      */
     public function setLoginName($loginName) {
-        $this->loginName = preg_replace('/\W+/u', '_', trim($loginName));
+        $this->loginName = $loginName;
         return $this;
     }
 
