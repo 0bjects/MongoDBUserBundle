@@ -1,0 +1,7 @@
+{# also edit in finishSignup #}
+{% trans %}welcome{% endtrans %} {{ user }} {% trans %}to our site{% endtrans %}<br/>
+{% trans %}you can login to our site with{% endtrans %}: "{{ user.getUsername() }}"<br/>
+{% trans %}your password is{% endtrans %}: "{{ password }}"<br/>
+{% if active == false %}
+{% trans %}press on the next link to activate your account{% endtrans %} <a href="{{ url('user_active', {'confirmationCode': user.confirmationCode, 'email': user.email}) }}">{% trans %}activate my account{% endtrans %}</a>
+{% endif %}

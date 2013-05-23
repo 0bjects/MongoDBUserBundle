@@ -11,7 +11,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
  * @MongoDB\Document
- * @Unique(fields={"loginName"}, groups={"loginName"})
+ * @Unique(fields={"loginName"}, groups={"signup", "loginName"})
+ * @Unique(fields={"email"}, groups={"signup", "edit", "email"})
  */
 class User implements AdvancedUserInterface {
 
@@ -27,7 +28,7 @@ class User implements AdvancedUserInterface {
 
     /**
      * @MongoDB\String
-     * @Assert\NotBlank(groups={"loginName"})
+     * @Assert\NotBlank(groups={"signup", "loginName"})
      * @Assert\Regex(pattern="/^\w+$/u", groups={"loginName"}, message="Only characters, numbers and _")
      */
     private $loginName;
@@ -480,16 +481,23 @@ class User implements AdvancedUserInterface {
      * this function will return the string representing the user gender
      * @return string gender type
      */
-    public function getGenderString() {
-        if ($this->gender === null) {
-            return 'unknown';
+    public function getGenderString($locale = 'en') {
+        $gendersArray = $this->getGendersArray($locale);
+        if ($this->gender === 0 || $this->gender === 1) {
+            return $gendersArray[$this->gender];
         }
-        if ($this->gender === 0) {
-            return 'Female';
-        }
-        if ($this->gender === 1) {
-            return 'Male';
-        }
+        return '';
+    }
+
+    /**
+     * @author Mahmoud
+     * @param string $locale
+     */
+    public function getGendersArray($locale = 'en') {
+        return array(
+            0 => 'Female',
+            1 => 'Male'
+        );
     }
 
     /**

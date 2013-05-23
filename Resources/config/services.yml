@@ -1,5 +1,5 @@
 parameters:
-#    objects_user.example.class: Objects\MongoDBUserBundle\Example
+    auto_active: false
 
 services:
 #    objects_user.example:

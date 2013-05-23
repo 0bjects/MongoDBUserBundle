@@ -1,0 +1,1 @@
+{% trans %}press on the next link to reactivate your account{% endtrans %} <a href="{{ url('user_active', {'confirmationCode': user.confirmationCode, 'email': user.email}) }}">{% trans %}Reactivate My Account{% endtrans %}</a>

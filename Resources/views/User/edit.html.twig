@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{% trans %}Edit My Account{% endtrans %}{% endblock %}
+
+{% block body %}
+
+{# edit next 2 flags in login.html.twig #}
+{% for flashMessage in app.session.flashbag.get('successSignup') %}
+<div class="alert alert-success">
+    {# edit next line in UserController:finishSignUp #}
+    {% trans %}welcome{% endtrans %} {{ app.user }} {% trans %}to our site{% endtrans %}.
+    {% if not is_granted('ROLE_USER') %}
+    {% trans %}please check your email for the activation link{% endtrans %}.
+    {% endif %}
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('changeYourPassword') %}
+<div class="alert alert-success">
+    {% trans %}Please change your password{% endtrans %}.
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('accountActive') %}
+<div class="alert alert-success">
+    {% trans %}Your account is now active{% endtrans %}.
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('accountAlreadyActive') %}
+<div class="alert alert-info">
+    {% trans %}Your account is already active{% endtrans %}.
+</div>
+{% endfor %}
+
+{# edit in login.html.twig #}
+{% for flashMessage in app.session.flashbag.get('successEdit') %}
+<div class="alert alert-info">
+    {% trans %}Edited Successfully{% endtrans %}.
+</div>
+{% endfor %}
+
+{% if form_errors(form) %}
+<div class="alert alert-error">
+    {{ form_errors(form) }}
+</div>
+{% endif %}
+
+<form action="{{ path('user_edit') }}" method="post" {{ form_enctype(form) }}>
+
+    {% if oldPassword %}
+        {{ form_errors(form.oldPassword) }}<br>
+        <label>{% trans %}Old Password{% endtrans %}:</label>
+        {{ form_widget(form.oldPassword) }}<br>
+    {% endif %}
+
+    {{ form_errors(form.userPassword.first) }}<br>
+    <label>{% trans %}New Password{% endtrans %}:</label>
+    {{ form_widget(form.userPassword.first) }}<br>
+
+    <label>{% trans %}Retype New Password{% endtrans %}:</label>
+    {{ form_widget(form.userPassword.second) }}<br>
+
+    {% if changeUserName %}
+        {{ form_errors(form.loginName) }}<br>
+        <label>{% trans %}Login Name{% endtrans %}:</label>
+        {{ form_widget(form.loginName) }}<br>
+        <span>{% trans %}You can change your login name only once{% endtrans %}</span><br>
+    {% endif %}
+
+    {{ form_errors(form.email) }}<br>
+    <label>{% trans %}Email{% endtrans %}:</label>
+    {{ form_widget(form.email) }}<br>
+
+    {{ form_errors(form.firstName) }}<br>
+    <label>{% trans %}First Name{% endtrans %}:</label>
+    {{ form_widget(form.firstName) }}<br>
+
+    {{ form_errors(form.lastName) }}<br>
+    <label>{% trans %}Last Name{% endtrans %}:</label>
+    {{ form_widget(form.lastName) }}<br>
+
+    {{ form_errors(form.gender) }}<br>
+    <label>{% trans %}Gender{% endtrans %}:</label>
+    {{ form_widget(form.gender) }}<br>
+
+    {{ form_errors(form.about) }}<br>
+    <label>{% trans %}About You{% endtrans %}:</label>
+    {{ form_widget(form.about) }}<br>
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="{% trans %}Edit{% endtrans %}" title="{% trans %}Edit{% endtrans %}">
+</form>
+{% endblock %}

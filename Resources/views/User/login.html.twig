@@ -1,26 +1,64 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% trans %}Login{% endtrans %}{% endblock %}
 
 {% block body %}
+
+{# edit next 2 flags in edit.html.twig #}
+{% for flashMessage in app.session.flashbag.get('successSignup') %}
+<div class="alert alert-success">
+    {# edit next line in UserController:finishSignUp #}
+    {% trans %}welcome{% endtrans %} {{ app.user }} {% trans %}to our site{% endtrans %}.
+    {% if not is_granted('ROLE_USER') %}
+    {% trans %}please check your email for the activation link{% endtrans %}.
+    {% endif %}
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('accountActive') %}
+<div class="alert alert-success">
+    {% trans %}Your account is now active{% endtrans %}.
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('invalidConfrimationCode') %}
+<div class="alert alert-error">
+    {% trans %}Invalid confirmation code{% endtrans %}.
+</div>
+{% endfor %}
+
+{# edit in edit.html.twig #}
+{% for flashMessage in app.session.flashbag.get('successEdit') %}
+<div class="alert alert-info">
+    {% trans %}Edited Successfully{% endtrans %}.
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('emailSent') %}
+<div class="alert alert-success">
+    {% trans %}Done, Please check your email{% endtrans %}.
+</div>
+{% endfor %}
 
 {% if error %}
     <div>{{ error.message }}</div>
 {% endif %}
 
 <form action="{{ path('login_check') }}" method="post">
-    <label for="username">Login Name:</label>
+    <label for="username">{% trans %}Login Name{% endtrans %}:</label>
     <input type="text" id="username" name="_username" placeholder="Login Name" value="{{ last_username }}" />
     <br/>
 
-    <label for="password">Password:</label>
+    <label for="password">{% trans %}Password{% endtrans %}:</label>
     <input type="password" id="password" name="_password" placeholder="Password" />
     <br/>
 
-    <label for="remember_me">Remember me:</label>
-    <input type="checkbox" id="remember_me" name="_remember_me" checked />
+    <label for="remember_me">{% trans %}Remember me{% endtrans %}:</label>
+    <input type="checkbox" id="remember_me" name="_remember_me" checked="" />
     <br/>
 
-    <button type="submit">Login</button>
+    <button type="submit" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</button>
 </form>
+<br/>
+<a title="{% trans %}forgot your password?{% endtrans %}" href="{{ path('user_forgot_password') }}">{% trans %}forgot your password ?{% endtrans %}</a>
 {% endblock %}

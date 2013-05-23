@@ -1,9 +1,29 @@
-login:
-    path:  /login
-    defaults: { _controller: ObjectsMongoDBUserBundle:User:login }
+logout:
+    path: /logout
 
 login_check:
-    path:  /login_check
+    path: /login_check
 
-logout:
-    path:  /logout
+login:
+    path: /login
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:login }
+
+user_signup:
+    path: /user/signup
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:signup }
+
+user_active:
+    path: /user/activation/{confirmationCode}/{email}
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:activation }
+
+user_edit:
+    path: /user/edit
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:edit }
+
+user_forgot_password:
+    path: /user/forgot/password
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:forgotPassword }
+
+user_change_password:
+    path: /user/change/password/{confirmationCode}/{email}
+    defaults: { _controller: ObjectsMongoDBUserBundle:User:changePassword }
