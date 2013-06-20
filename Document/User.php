@@ -69,6 +69,11 @@ class User implements AdvancedUserInterface {
     private $createdAt;
 
     /**
+     * @MongoDB\Date
+     */
+    private $updatedAt;
+
+    /**
      * @MongoDB\String
      */
     private $firstName;
@@ -295,6 +300,7 @@ class User implements AdvancedUserInterface {
      */
     public function __construct() {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->confirmationCode = md5(uniqid(rand()));
         $this->salt = md5(time());
     }
@@ -328,6 +334,13 @@ class User implements AdvancedUserInterface {
             $this->setFirstName($this->getUsername());
         }
         return $this;
+    }
+
+    /**
+     * @MongoDB\PreUpdate()
+     */
+    public function setUpdatedAtToNow() {
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -722,6 +735,26 @@ class User implements AdvancedUserInterface {
      */
     public function getEmail() {
         return $this->email;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param date $updatedAt
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt) {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return date $updatedAt
+     */
+    public function getUpdatedAt() {
+        return $this->updatedAt;
     }
 
 }
