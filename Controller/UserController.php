@@ -49,7 +49,7 @@ class UserController extends Controller {
                 ->getForm();
         $error = false;
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->handleRequest($request);
             if ($form->isValid()) {
                 $data = $form->getData();
                 $email = $data['email'];
@@ -124,7 +124,7 @@ class UserController extends Controller {
                 ))
                 ->getForm();
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->handleRequest($request);
             if ($form->isValid()) {
                 return $this->finishSignUp($user);
             }
@@ -272,7 +272,7 @@ class UserController extends Controller {
         //create the form
         $form = $formBuilder->getForm();
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->handleRequest($request);
             if ($form->isValid()) {
                 if ($oldPassword) {
                     $relogin = true;
