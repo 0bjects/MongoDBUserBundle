@@ -292,7 +292,7 @@ class User implements AdvancedUserInterface {
      * @return string the document upload directory path starting from web folder
      */
     private function getUploadDir() {
-        return 'images/users-profiles-images';
+        return 'uploads/users-profiles-images';
     }
 
     /**
