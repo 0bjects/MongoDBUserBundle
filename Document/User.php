@@ -28,6 +28,7 @@ class User implements AdvancedUserInterface {
 
     /**
      * @MongoDB\String
+     * @MongoDB\UniqueIndex
      * @Assert\NotBlank(groups={"signup", "loginName"})
      * @Assert\Regex(pattern="/^\w+$/u", groups={"loginName"}, message="Only characters, numbers and _")
      */
@@ -35,6 +36,7 @@ class User implements AdvancedUserInterface {
 
     /**
      * @MongoDB\String
+     * @MongoDB\UniqueIndex
      * @Assert\Email(groups={"signup", "edit", "email"})
      */
     private $email;
