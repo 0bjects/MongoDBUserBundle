@@ -76,6 +76,21 @@ class User implements AdvancedUserInterface {
     /**
      * @MongoDB\String
      */
+    private $metaTitle;
+
+    /**
+     * @MongoDB\String
+     */
+    private $metaDescription;
+
+    /**
+     * @MongoDB\String
+     */
+    private $metaKeywords;
+
+    /**
+     * @MongoDB\String
+     */
     private $firstName;
 
     /**
@@ -755,6 +770,66 @@ class User implements AdvancedUserInterface {
      */
     public function getUpdatedAt() {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set metaTitle
+     *
+     * @param string $metaTitle
+     * @return self
+     */
+    public function setMetaTitle($metaTitle) {
+        $this->metaTitle = $metaTitle;
+        return $this;
+    }
+
+    /**
+     * Get metaTitle
+     *
+     * @return string $metaTitle
+     */
+    public function getMetaTitle() {
+        return $this->metaTitle;
+    }
+
+    /**
+     * Set metaDescription
+     *
+     * @param string $metaDescription
+     * @return self
+     */
+    public function setMetaDescription($metaDescription) {
+        $this->metaDescription = $metaDescription;
+        return $this;
+    }
+
+    /**
+     * Get metaDescription
+     *
+     * @return string $metaDescription
+     */
+    public function getMetaDescription() {
+        return $this->metaDescription;
+    }
+
+    /**
+     * Set metaKeywords
+     *
+     * @param string $metaKeywords
+     * @return self
+     */
+    public function setMetaKeywords($metaKeywords) {
+        $this->metaKeywords = $metaKeywords;
+        return $this;
+    }
+
+    /**
+     * Get metaKeywords
+     *
+     * @return string $metaKeywords
+     */
+    public function getMetaKeywords() {
+        return $this->metaKeywords;
     }
 
 }
