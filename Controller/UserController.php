@@ -251,8 +251,9 @@ class UserController extends Controller {
                 ))
                 ->add('firstName')
                 ->add('lastName', null, array('required' => false))
-                ->add('about', null, array('required' => false))
+                ->add('about', 'textarea', array('required' => false))
                 ->add('email')
+                ->add('file', 'file', array('required' => false, 'label' => 'image'))
         ;
         if ($oldPassword) {
             $formBuilder->add('oldPassword', 'password');

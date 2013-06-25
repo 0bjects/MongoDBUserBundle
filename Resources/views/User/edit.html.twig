@@ -87,8 +87,37 @@
     <label>{% trans %}About You{% endtrans %}:</label>
     {{ form_widget(form.about) }}<br>
 
+    {{ form_errors(form.file) }}<br>
+    <label>{% trans %}Image{% endtrans %}:</label>
+    {{ form_widget(form.file, {'attr': {'onchange': 'readURL(this);'} }) }}
+    {% if app.user.image %}
+    <img class="imageThumb" width="60" height="60" src="{{ asset(app.user.getSmallImageUrl(60, 60)) }}" />
+    {% endif %}
+
     {{ form_rest(form) }}
 
     <input type="submit" value="{% trans %}Edit{% endtrans %}" title="{% trans %}Edit{% endtrans %}">
 </form>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                if ($(input).parent().find('img.imageThumb').length > 0) {
+                    $(input).parent().find('img.imageThumb').attr('src', e.target.result);
+                    if ($(input).parent().find('a.removeImage').length > 0) {
+                        $(input).parent().find('a.removeImage').remove();
+                    }
+                } else {
+                    $(input).parent().append('<img class="imageThumb" width="60" height="60" src="' + e.target.result + '"/>');
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 {% endblock %}
