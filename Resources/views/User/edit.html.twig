@@ -16,13 +16,13 @@
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('changeYourPassword') %}
-<div class="alert alert-success">
+<div class="alert alert-info">
     {% trans %}Please change your password{% endtrans %}.
 </div>
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('successEdit') %}
-<div class="alert alert-info">
+<div class="alert alert-success">
     {% trans %}Edited Successfully{% endtrans %}.
 </div>
 {% endfor %}

@@ -22,7 +22,7 @@
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('successEdit') %}
-<div class="alert alert-info">
+<div class="alert alert-success">
     {% trans %}Edited Successfully{% endtrans %}.
 </div>
 {% endfor %}
