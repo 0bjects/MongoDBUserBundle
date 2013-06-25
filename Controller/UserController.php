@@ -4,7 +4,6 @@ namespace Objects\MongoDBUserBundle\Controller;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,16 +35,8 @@ class UserController extends Controller {
      */
     public function forgotPasswordAction() {
         $request = $this->getRequest();
-        $collectionConstraint = new Collection(array(
-            'email' => array(
-                new Email(),
-                new NotBlank()
-            )
-        ));
-        $form = $this->createFormBuilder(null, array(
-                    'validation_constraint' => $collectionConstraint,
-                ))
-                ->add('email', 'email')
+        $form = $this->createFormBuilder()
+                ->add('email', 'email', array('constraints' => array(new Email(), new NotBlank())))
                 ->getForm();
         $error = false;
         if ($request->getMethod() == 'POST') {
