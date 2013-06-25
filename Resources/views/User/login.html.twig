@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{# edit next 2 flags in edit.html.twig #}
+{# edit next 3 flags in edit.html.twig #}
 {% for flashMessage in app.session.flashbag.get('successSignup') %}
 <div class="alert alert-success">
     {# edit next line in UserController:finishSignUp #}
@@ -21,16 +21,15 @@
 </div>
 {% endfor %}
 
-{% for flashMessage in app.session.flashbag.get('invalidConfrimationCode') %}
-<div class="alert alert-error">
-    {% trans %}Invalid confirmation code{% endtrans %}.
-</div>
-{% endfor %}
-
-{# edit in edit.html.twig #}
 {% for flashMessage in app.session.flashbag.get('successEdit') %}
 <div class="alert alert-info">
     {% trans %}Edited Successfully{% endtrans %}.
+</div>
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('invalidConfrimationCode') %}
+<div class="alert alert-error">
+    {% trans %}Invalid confirmation code{% endtrans %}.
 </div>
 {% endfor %}
 
