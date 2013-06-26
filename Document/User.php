@@ -832,4 +832,24 @@ class User implements AdvancedUserInterface {
         return $this->metaKeywords;
     }
 
+    /**
+     * Get oldPassword
+     *
+     * @return string $oldPassword
+     */
+    public function getOldPassword() {
+        return $this->oldPassword;
+    }
+
+    /**
+     * Set oldPassword
+     *
+     * @param string $oldPassword
+     * @return self
+     */
+    public function setOldPassword($oldPassword) {
+        $this->oldPassword = $oldPassword;
+        return $this;
+    }
+
 }
